@@ -1,12 +1,13 @@
 import Head from "next/head";
+import TriviaCard from "../components/trivia/TriviaCard";
 import styles from "./Home.module.css";
 
-import { Card } from "antd";
-const { Meta } = Card;
-
 import survey from "../seeders/survey-sample.json";
+import { useState } from "react";
 
 export default function Home() {
+  const [triviaStarted, setTriviaStarted] = useState(false);
+  console.log(triviaStarted);
   return (
     <div className={styles.body}>
       <Head>
@@ -23,12 +24,11 @@ export default function Home() {
         <h2 className={styles.title}>Quiz to Earn!</h2>
 
         <div className={styles.triviaContainer}>
-          <Card
-            cover={<img alt="daily trivia" src={survey.image} />}
-            style={{ minWidth: "50vw", maxWidth: "60vh" }}
-          >
-            <Meta title={survey.title} description=<button>Start!</button> />
-          </Card>
+          <TriviaCard
+            image={survey.image}
+            title={survey.title}
+            start={() => setTriviaStarted(true)}
+          />
         </div>
       </main>
     </div>
