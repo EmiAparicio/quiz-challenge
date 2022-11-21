@@ -1,0 +1,21 @@
+.body {
+  background-color: #59b1c1b0;
+  height: 100vh;
+  width: 100vw;
+  padding: 0 2rem;
+  padding-top: 3vh;
+  margin: 0;
+}
+
+.title {
+  user-select: none;
+  text-align: center;
+}
+
+.triviaContainer {
+  margin-top: 0vh;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
