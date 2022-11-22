@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import Head from "next/head";
 import TriviaCard from "../components/trivia/TriviaCard";
 import TriviaCarousel from "../components/trivia/TriviaCarousel";
+import WalletHeader from "../components/metamask/WalletHeader";
 import styles from "./Home.module.css";
 
 import surveyData from "../seeders/survey-sample.json";
@@ -17,6 +18,7 @@ export const ResultsContext = createContext();
 export default function Home() {
   const [triviaStarted, setTriviaStarted] = useState(false);
   const [results, setResults] = useState({});
+  const [connection, setConnection] = useState(false);
 
   return (
     <div className={styles.body}>
@@ -27,7 +29,7 @@ export default function Home() {
       </Head>
 
       <header>
-        <button>Connect Wallet</button>
+        <WalletHeader setConnection={setConnection} />
       </header>
 
       <main>
@@ -36,9 +38,11 @@ export default function Home() {
         <div className={styles.triviaContainer}>
           {!triviaStarted ? (
             <TriviaCard
-              image={survey.image}
-              title={survey.title}
-              start={() => setTriviaStarted(true)}
+              survey={survey}
+              start={{
+                connection: connection,
+                start: () => setTriviaStarted(true),
+              }}
             />
           ) : (
             <ResultsContext.Provider value={[results, setResults]}>

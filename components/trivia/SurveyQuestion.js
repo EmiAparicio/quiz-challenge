@@ -6,7 +6,7 @@ import styles from "./SurveyQuestion.module.css";
 
 export default function SurveyQuestion({ question, onSelect, currentSlide }) {
   const { text, image, options } = question;
-  const [results, setResults] = useContext(ResultsContext);
+  const [, setResults] = useContext(ResultsContext);
 
   const surveyOptions = (
     <>
@@ -18,7 +18,11 @@ export default function SurveyQuestion({ question, onSelect, currentSlide }) {
         onSelect={(value) => {
           setResults((prev) => ({
             ...prev,
-            [currentSlide]: { question: text, result: options[value - 1].text },
+            [currentSlide]: {
+              question: text,
+              result: options[value - 1].text,
+              value: value,
+            },
           }));
           onSelect();
         }}

@@ -1,0 +1,9 @@
+.headerContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.walletAddress {
+  background-color: white;
+}

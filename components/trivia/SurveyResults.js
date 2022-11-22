@@ -5,7 +5,7 @@ import { ResultsContext } from "../../pages";
 import styles from "./SurveyResults.module.css";
 
 export default function SurveyResults({ survey }) {
-  const [results, setResults] = useContext(ResultsContext);
+  const [results] = useContext(ResultsContext);
 
   const finishedSurvey =
     Object.keys(results).length < survey.questions.length - 1;
