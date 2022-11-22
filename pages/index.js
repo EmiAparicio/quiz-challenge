@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { createContext, useState } from "react";
 import Head from "next/head";
 import TriviaCard from "../components/trivia/TriviaCard";
 import TriviaCarousel from "../components/trivia/TriviaCarousel";
@@ -12,8 +12,11 @@ survey.questions.push({
   lifetimeSeconds: "results",
 });
 
+export const ResultsContext = createContext();
+
 export default function Home() {
   const [triviaStarted, setTriviaStarted] = useState(false);
+  const [results, setResults] = useState({});
 
   return (
     <div className={styles.body}>
@@ -38,7 +41,9 @@ export default function Home() {
               start={() => setTriviaStarted(true)}
             />
           ) : (
-            <TriviaCarousel survey={survey} />
+            <ResultsContext.Provider value={[results, setResults]}>
+              <TriviaCarousel survey={survey} />
+            </ResultsContext.Provider>
           )}
         </div>
       </main>

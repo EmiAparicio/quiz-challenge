@@ -1,11 +1,12 @@
 import { Select } from "antd";
-import { Image } from "antd";
-import { useEffect } from "react";
+import { useContext } from "react";
+import { ResultsContext } from "../../pages";
 
 import styles from "./SurveyQuestion.module.css";
 
-export default function SurveyQuestion({ question, onSelect }) {
+export default function SurveyQuestion({ question, onSelect, currentSlide }) {
   const { text, image, options } = question;
+  const [results, setResults] = useContext(ResultsContext);
 
   const surveyOptions = (
     <>
@@ -14,7 +15,13 @@ export default function SurveyQuestion({ question, onSelect }) {
         style={{ backgroundImage: `url(${image})` }}
       ></div>
       <Select
-        onSelect={onSelect}
+        onSelect={(value) => {
+          setResults((prev) => ({
+            ...prev,
+            [currentSlide]: { question: text, result: options[value - 1].text },
+          }));
+          onSelect();
+        }}
         placeholder="Choose an option"
         options={options.map((option, i) => {
           return { value: i + 1, label: option.text };
