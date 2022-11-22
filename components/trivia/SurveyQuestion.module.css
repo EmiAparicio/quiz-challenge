@@ -1,0 +1,23 @@
+.card {
+  background-color: rgba(0, 0, 0, 0.096);
+  border-color: rgba(0, 0, 0, 0);
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+  align-items: center;
+  padding-bottom: 2vh;
+}
+
+.imageContainer {
+  width: 50vw;
+  height: 30vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.title {
+  font-size: 2vh;
+}

@@ -1,13 +1,20 @@
+import { useState } from "react";
 import Head from "next/head";
 import TriviaCard from "../components/trivia/TriviaCard";
+import TriviaCarousel from "../components/trivia/TriviaCarousel";
 import styles from "./Home.module.css";
 
-import survey from "../seeders/survey-sample.json";
-import { useState } from "react";
+import surveyData from "../seeders/survey-sample.json";
+const survey = surveyData;
+survey.questions.push({
+  text: surveyData.title,
+  image: surveyData.image,
+  lifetimeSeconds: "results",
+});
 
 export default function Home() {
   const [triviaStarted, setTriviaStarted] = useState(false);
-  console.log(triviaStarted);
+
   return (
     <div className={styles.body}>
       <Head>
@@ -24,11 +31,15 @@ export default function Home() {
         <h2 className={styles.title}>Quiz to Earn!</h2>
 
         <div className={styles.triviaContainer}>
-          <TriviaCard
-            image={survey.image}
-            title={survey.title}
-            start={() => setTriviaStarted(true)}
-          />
+          {!triviaStarted ? (
+            <TriviaCard
+              image={survey.image}
+              title={survey.title}
+              start={() => setTriviaStarted(true)}
+            />
+          ) : (
+            <TriviaCarousel survey={survey} />
+          )}
         </div>
       </main>
     </div>

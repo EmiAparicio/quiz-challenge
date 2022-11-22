@@ -12,7 +12,6 @@ export default function TriviaCard({ image, title, start }) {
   return (
     <Card
       cover={<img alt="daily trivia" src={image} />}
-      style={{ minWidth: "50vw", maxWidth: "60vh" }}
       className={styles.card}
     >
       <Card.Meta title={metaTitle} description={button} />

@@ -4,6 +4,8 @@
 }
 
 .card {
+  min-width: 50vw;
+  max-width: 60vh;
   display: flex;
   flex-direction: column;
   align-items: center;
