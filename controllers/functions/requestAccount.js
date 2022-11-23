@@ -5,7 +5,6 @@ export default async function requestAccount(connectionDone) {
     });
     let currentAddress = accounts[0];
     connectionDone(currentAddress);
-    return accounts.length;
   } catch (error) {
     console.error(error);
   }

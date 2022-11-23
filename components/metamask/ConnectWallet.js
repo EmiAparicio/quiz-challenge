@@ -6,14 +6,19 @@ import requestAccount from "../../controllers/functions/requestAccount";
 
 export default function ConnectWallet({ metamaskInstalled, connectionDone }) {
   return (
-    <Button type="primary" onClick={() => requestAccount(connectionDone)}>
+    <Button
+      type="primary"
+      onClick={() => {
+        if (metamaskInstalled) requestAccount(connectionDone);
+      }}
+    >
       {!metamaskInstalled ? (
         <a
           href="https://metamask.io/download/"
           target="blank"
           className={styles.link}
         >
-          Install Metamask
+          Install Metamask and reload
         </a>
       ) : (
         "Connect wallet"

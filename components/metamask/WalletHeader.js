@@ -23,16 +23,16 @@ import CONTRACT_ABI from "../../seeders/abi.json";
 export default function WalletHeader({ setConnection }) {
   const [contractWithWallet, setContractWithWallet] =
     useContext(ContractContext);
+  const [resetContractWithWallet, setResetContractWithWallet] = useState(true);
 
   // Check for Metamask Extension hook
   const [metamaskInstalled, metamask] = useMetamaskCheck();
 
   // Listen to wallet account change
   const [currentAddress, setCurrentAddress] = useState();
-  const [accountsNumber, setAccNum] = useState();
   useEffect(() => {
     window.ethereum?.on("accountsChanged", () =>
-      setAccNum(requestAccount(setCurrentAddress))
+      requestAccount(setCurrentAddress)
     );
   }, [currentAddress]);
 
@@ -43,7 +43,10 @@ export default function WalletHeader({ setConnection }) {
     return bool;
   }, [currentChain]);
 
-  useEffect(() => setConnection(correctChain), [correctChain]);
+  useEffect(() => {
+    if (correctChain) setResetContractWithWallet((prev) => !prev);
+    setConnection(correctChain);
+  }, [correctChain]);
 
   function connectionDone(address) {
     setCurrentAddress(() => {
@@ -57,24 +60,16 @@ export default function WalletHeader({ setConnection }) {
   useEffect(() => {
     const provider = metamask && new ethers.providers.Web3Provider(metamask);
 
-    const wallet = new ethers.Wallet(
-      process.env.NEXT_PUBLIC_PRIVATE_KEY,
-      provider
-    );
-
     const contract = new ethers.Contract(
       process.env.NEXT_PUBLIC_CONTRACT_ADD,
       CONTRACT_ABI,
       provider && provider.getSigner()
     );
 
-    const contractWithWallet =
-      accountsNumber === 1
-        ? contract.connect(wallet)
-        : contract.connect(provider?.getSigner());
+    const contractWithWallet = contract.connect(provider?.getSigner());
 
     setContractWithWallet(contractWithWallet);
-  }, [currentAddress, accountsNumber]);
+  }, [currentAddress, resetContractWithWallet]);
 
   return (
     <div className={styles.headerContainer}>
