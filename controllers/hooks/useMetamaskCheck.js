@@ -9,6 +9,7 @@ export default function useMetamaskCheck() {
       setInterval(() => {
         if (window.ethereum) setMmskInstalled([true, window.ethereum]);
       }, 1000);
+      // location.reload();
     }
   }, []);
 

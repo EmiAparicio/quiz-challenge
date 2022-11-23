@@ -10,27 +10,36 @@ export default function SubmitSurvey({ disabled }) {
   // Survey under cooldown
   const [submitCd, setSubmitCd] = useState(false);
 
+  const [submited, setSubmission] = useState(false);
+
   return (
-    <Popover
-      title="Cooldown period has not finished!"
-      trigger="click"
-      open={submitCd}
-      onBlur={() => setSubmitCd(false)}
-    >
-      <Button
-        disabled={disabled}
-        type="primary"
-        onClick={() =>
-          requestSubmit(
-            1,
-            Object.values(results).map((r) => r.value),
-            contractWithWallet,
-            setSubmitCd
-          )
-        }
-      >
-        Submit
-      </Button>
-    </Popover>
+    <>
+      {submited ? (
+        <></>
+      ) : (
+        <Popover
+          title="Cooldown period has not finished!"
+          trigger="click"
+          open={submitCd}
+          onBlur={() => setSubmitCd(false)}
+        >
+          <Button
+            disabled={disabled}
+            type="primary"
+            onClick={() =>
+              requestSubmit(
+                1,
+                Object.values(results).map((r) => r.value),
+                contractWithWallet,
+                setSubmitCd,
+                setSubmission
+              )
+            }
+          >
+            Submit
+          </Button>
+        </Popover>
+      )}
+    </>
   );
 }
