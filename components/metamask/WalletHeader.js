@@ -31,10 +31,10 @@ export default function WalletHeader({ setConnection }) {
   const [currentAddress, setCurrentAddress] = useState();
   const [accountsNumber, setAccNum] = useState();
   useEffect(() => {
-    window.ethereum.on("accountsChanged", () =>
+    window.ethereum?.on("accountsChanged", () =>
       setAccNum(requestAccount(setCurrentAddress))
     );
-  }, []);
+  }, [currentAddress]);
 
   // Listen to chain change
   const [currentChain, setCurrentChain] = useState();
