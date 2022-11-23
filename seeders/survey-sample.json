@@ -1,10 +1,10 @@
 {
   "title": "Sample Survey",
-  "image": "https://48tools.com/wp-content/uploads/2015/09/shortlink.png",
+  "image": "https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks2/camera-stock-photography.jpg",
   "questions": [
     {
       "text": "Question1",
-      "image": "https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg",
+      "image": "https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks2/stock-photography.jpg",
       "lifetimeSeconds": 10,
       "options": [
         {
@@ -20,7 +20,7 @@
     },
     {
       "text": "Question2",
-      "image": "https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks3/stock-photography-slider.jpg",
+      "image": "https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks3/photography-stocks.jpg",
       "lifetimeSeconds": 5,
       "options": [
         {
