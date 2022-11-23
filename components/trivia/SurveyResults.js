@@ -1,6 +1,7 @@
-import { Button, Result } from "antd";
+import { Result } from "antd";
 import React, { useContext } from "react";
 import { ResultsContext } from "../../pages";
+import SubmitSurvey from "./SubmitSurvey";
 
 import styles from "./SurveyResults.module.css";
 
@@ -35,9 +36,9 @@ export default function SurveyResults({ survey }) {
       title={resultsTitle}
       subTitle={resultsShown}
       extra={[
-        <button key="submit" disabled={finishedSurvey}>
+        <SubmitSurvey key="submit" disabled={finishedSurvey}>
           {finishedSurvey ? "Finish the survey!" : "Submit"}
-        </button>,
+        </SubmitSurvey>,
       ]}
     />
   );

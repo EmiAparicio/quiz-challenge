@@ -9,7 +9,7 @@ export default function TriviaCarousel({ survey }) {
   const ref = useRef();
   const [timer, setTimer] = useState(null);
 
-  const [results, setResults] = useContext(ResultsContext);
+  // const [results, setResults] = useContext(ResultsContext);
 
   useEffect(() => {
     setTimer((prev) => {
@@ -53,9 +53,4 @@ export default function TriviaCarousel({ survey }) {
       })}
     </Carousel>
   );
-}
-{
-  /* {Object.values(results).map((e) => (
-  <div>{e}</div>
-))} */
 }

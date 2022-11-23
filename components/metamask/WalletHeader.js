@@ -8,8 +8,9 @@ import ConnectWallet from "./ConnectWallet";
 import TokenBalance from "./TokenBalance";
 
 // Hooks
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useContext, useMemo, useState } from "react";
 import useMetamaskCheck from "../../controllers/hooks/useMetamaskCheck";
+import { ContractContext } from "../../pages";
 
 // Functions
 import requestAccount from "../../controllers/functions/requestAccount";
@@ -20,6 +21,9 @@ import requestChainChange from "../../controllers/functions/requestChainChange";
 import CONTRACT_ABI from "../../seeders/abi.json";
 
 export default function WalletHeader({ setConnection }) {
+  const [contractWithWallet, setContractWithWallet] =
+    useContext(ContractContext);
+
   // Check for Metamask Extension hook
   const [metamaskInstalled, metamask] = useMetamaskCheck();
 
@@ -50,7 +54,7 @@ export default function WalletHeader({ setConnection }) {
     });
   }
 
-  const contractWithWallet = useMemo(() => {
+  useEffect(() => {
     const provider = metamask && new ethers.providers.Web3Provider(metamask);
 
     const wallet = new ethers.Wallet(
@@ -69,7 +73,7 @@ export default function WalletHeader({ setConnection }) {
         ? contract.connect(wallet)
         : contract.connect(provider?.getSigner());
 
-    return contractWithWallet;
+    setContractWithWallet(contractWithWallet);
   }, [currentAddress, accountsNumber]);
 
   return (
