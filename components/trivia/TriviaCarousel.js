@@ -1,6 +1,5 @@
 import { Carousel } from "antd";
-import { useRef, useState, useEffect, useContext } from "react";
-import { ResultsContext } from "../../pages";
+import { useRef, useState, useEffect } from "react";
 import SurveyQuestion from "./SurveyQuestion";
 import SurveyResults from "./SurveyResults";
 import styles from "./TriviaCarousel.module.css";
@@ -9,8 +8,7 @@ export default function TriviaCarousel({ survey }) {
   const ref = useRef();
   const [timer, setTimer] = useState(null);
 
-  // const [results, setResults] = useContext(ResultsContext);
-
+  // Start first slide timer
   useEffect(() => {
     setTimer((prev) => {
       if (prev === null) {
@@ -26,6 +24,7 @@ export default function TriviaCarousel({ survey }) {
       ref={ref}
       beforeChange={() => clearTimeout(timer)}
       afterChange={(currentSlide) => {
+        // Start new slide timer
         const lifeTime = survey.questions[currentSlide].lifetimeSeconds;
         if (lifeTime !== "results")
           setTimer(
@@ -36,6 +35,7 @@ export default function TriviaCarousel({ survey }) {
       }}
       className={styles.carousel}
     >
+      {/* Show survey questions and results as last slide */}
       {survey.questions.map((question, i) => {
         return i !== survey.questions.length - 1 ? (
           <SurveyQuestion
