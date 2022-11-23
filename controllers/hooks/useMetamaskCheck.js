@@ -12,6 +12,6 @@ export default function useMetamaskCheck() {
     }
   }, []);
 
-  // Return boolean and metamask
+  // Return [boolean, metamask]
   return metamaskInstalled;
 }

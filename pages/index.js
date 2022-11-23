@@ -11,18 +11,25 @@ survey.questions.push({
   text: surveyData.title,
   image: surveyData.image,
   lifetimeSeconds: "results",
-});
+}); // Add a "results" element to "questions" array for carousel to map
 
 export const ResultsContext = createContext();
 export const ContractContext = createContext();
 
 export default function Home() {
+  // Boolean state: did the survey start?
   const [triviaStarted, setTriviaStarted] = useState(false);
+
+  // Chosen survey options state
   const [results, setResults] = useState({});
+
+  // Boolean state: is metamask connected to the right chain?
   const [connection, setConnection] = useState(false);
+
   const contractWithWallet = useState();
 
   return (
+    // Globally provide contract with wallet and its setter
     <ContractContext.Provider value={contractWithWallet}>
       <div className={styles.body}>
         <Head>
@@ -48,6 +55,7 @@ export default function Home() {
                 }}
               />
             ) : (
+              // Provide the trivia carousel tree with the results and the setter
               <ResultsContext.Provider value={[results, setResults]}>
                 <TriviaCarousel survey={survey} />
               </ResultsContext.Provider>
